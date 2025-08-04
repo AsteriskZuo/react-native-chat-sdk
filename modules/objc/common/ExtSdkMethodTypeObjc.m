@@ -380,6 +380,8 @@
           ExtSdkMethodKeygetMessagesWithIds : @(ExtSdkMethodKeygetMessagesWithIdsValue),
           ExtSdkMethodKeygetConvsMsgsWithKeyword : @(ExtSdkMethodKeygetConvsMsgsWithKeywordValue),
           ExtSdkMethodKeymodifyMsgBody : @(ExtSdkMethodKeymodifyMsgBodyValue),
+          
+          ExtSdkMethodKeygetOptions : @(ExtSdkMethodKeygetOptionsValue),
       };
     });
     if (nil != key) {

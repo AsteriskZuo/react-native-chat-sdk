@@ -48,6 +48,7 @@ import com.hyphenate.chat.EMVideoMessageBody;
 import com.hyphenate.chat.EMVoiceMessageBody;
 import com.hyphenate.exceptions.HyphenateException;
 import com.hyphenate.push.EMPushConfig;
+import com.hyphenate.push.EMPushType;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -333,7 +334,53 @@ class ExtSdkOptionsHelper {
             options.setUIKitVersion(json.getString("uikitVersion"));
         }
 
+        options.setEnableStatistics(json.optBoolean("enableStatistics", false));
+        options.setAutoLoadAllConversations(json.optBoolean("autoLoadConversations", true));
+        if (json.has("nativeLibBasePath")) {
+            options.setNativeLibBasePath(json.optString("nativeLibBasePath"));
+        }
+
         return options;
+    }
+
+    static Map<String, Object> toJson(EMOptions options) {
+        Map<String, Object> ret = new HashMap<>();
+        ret.put("appKey", options.getAppKey());
+        ret.put("appId", options.getAppId());
+        ret.put("autoLogin", options.getAutoLogin());
+        //    ret.put("debugModel", options.debugModel?);
+        ret.put("acceptInvitationAlways", options.getAcceptInvitationAlways());
+        ret.put("autoAcceptGroupInvitation", options.autoAcceptGroupInvitations());
+        ret.put("requireAck", options.getRequireAck());
+        ret.put("requireDeliveryAck", options.getRequireDeliveryAck());
+        ret.put("deleteMessagesAsExitGroup", options.deleteMessagesOnLeaveGroup());
+        ret.put("deleteMessagesAsExitChatRoom", options.deleteMessagesOnLeaveChatroom());
+        ret.put("isChatRoomOwnerLeaveAllowed", options.canChatroomOwnerLeave());
+        ret.put("sortMessageByServerTime", options.isSortMessageByServerTime());
+        ret.put("usingHttpsOnly", options.getUsingHttpsOnly());
+        ret.put("serverTransfer", options.getAutoTransferMessageAttachments());
+        ret.put("isAutoDownload", options.getAutodownloadThumbnail());
+        //    ret.put("pushConfig", pushConfig);
+        ret.put("enableDNSConfig", options.getEnableDNSConfig());
+        ret.put("dnsUrl", options.getDnsUrl());
+        ret.put("restServer", options.getRestServer());
+        ret.put("imServer", options.getImServer());
+        ret.put("imPort", options.getImPort());
+        ret.put("enableTLS", options.isEnableTLSConnection());
+        ret.put("messagesReceiveCallbackIncludeSend", options.isIncludeSendMessageInMessageListener());
+        ret.put("regardImportMessagesAsRead", options.regardImportedMsgAsRead());
+        ret.put("areaCode", options.getAreaCode());
+        ret.put("enableEmptyConversation", options.isLoadEmptyConversations());
+        ret.put("customDeviceName", options.getCustomDeviceName());
+        ret.put("customOSType", options.getCustomOSPlatform());
+        ret.put("useReplacedMessageContents", options.isUseReplacedMessageContents());
+        ret.put("loginExtraInfo", options.getLoginCustomExt());
+        ret.put("nativeLibBasePath", options.getNativeLibBasePath());
+        ret.put("uikitVersion", options.getUIKitVersion());
+        ret.put("enableStatistics", options.isEnableStatistics());
+        ret.put("autoLoadConversations", options.isAutoLoadAllConversations());
+
+        return ret;
     }
 }
 
@@ -555,7 +602,7 @@ class ExtSdkMessageHelper {
 
     static EMMessage fromJson(JSONObject json) throws JSONException {
         if (json == null) {
-          return null;
+            return null;
         }
         EMMessage message = null;
         JSONObject bodyJson = json.getJSONObject("body");

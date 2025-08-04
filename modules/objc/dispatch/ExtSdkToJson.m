@@ -1191,7 +1191,9 @@
     data[@"isChatRoomOwnerLeaveAllowed"] = @(self.canChatroomOwnerLeave);
     data[@"serverTransfer"] = @(self.isAutoTransferMessageAttachments);
     data[@"usingHttpsOnly"] = @(self.usingHttpsOnly);
-    data[@"pushConfig"] = @{@"pushConfig" : @{@"deviceId" : self.apnsCertName}};
+    if (self.apnsCertName != nil) {
+      data[@"pushConfig"] = @{@"pushConfig" : @{@"deviceId" : self.apnsCertName}};
+    }
     data[@"enableDNSConfig"] = @(self.enableDnsConfig);
     data[@"imPort"] = @(self.chatPort);
     data[@"imServer"] = self.chatServer;
@@ -1208,6 +1210,10 @@
     data[@"loginExtraInfo"] = self.loginExtensionInfo;
     data[@"workPathCopiable"] = @(self.workPathCopiable);
     data[@"appId"] = self.appId;
+    //  data[@"logLevel"] = @(self.logLevel);
+    data[@"enableStatistics"] = @(self.enableStatistics);
+    data[@"autoLoadConversations"] = @(self.autoLoadConversations);
+    data[@"uiKitVersion"] = self.uiKitVersion;
 
     return data;
 }
@@ -1236,7 +1242,9 @@
     options.canChatroomOwnerLeave = [aJson[@"isChatRoomOwnerLeaveAllowed"] boolValue];
     options.isAutoTransferMessageAttachments = [aJson[@"serverTransfer"] boolValue];
     options.usingHttpsOnly = [aJson[@"usingHttpsOnly"] boolValue];
-    options.apnsCertName = aJson[@"pushConfig"][@"apnsCertName"];
+    if (aJson[@"pushConfig"] != nil) {
+      options.apnsCertName = aJson[@"pushConfig"][@"deviceId"];
+    }
     options.enableDnsConfig = [aJson[@"enableDNSConfig"] boolValue];
     options.chatPort = [aJson[@"imPort"] intValue];
     options.chatServer = aJson[@"imServer"];
@@ -1261,6 +1269,9 @@
 
     options.loginExtensionInfo = aJson[@"loginExtraInfo"];
     options.workPathCopiable = aJson[@"workPathCopiable"];
+    //  options.logLevel = [aJson[@"logLevel"] intValue];
+    options.autoLoadConversations = aJson[@"autoLoadConversations"];
+    options.uiKitVersion = aJson[@"uiKitVersion"];
 
     return options;
 }

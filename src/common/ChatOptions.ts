@@ -229,12 +229,34 @@ export class ChatOptions {
   workPathCopiable?: boolean;
 
   /**
+   * The base path of the native library.
+   *
+   * **Note** This attribute is used only for the Android platform.
+   */
+  nativeLibBasePath?: string;
+
+  /**
    * The UIKit version.
    *
    * - (Default) undefined.
    *
    */
   uikitVersion?: string;
+
+  /**
+   * Whether to enable statistics.
+   *
+   * - `true`: Yes.
+   * - (Default) `false`: No.
+   */
+  enableStatistics?: boolean;
+  /**
+   * Whether to automatically load conversations when the SDK is initialized.
+   *
+   * - (Default) `true`: Yes. The SDK automatically loads conversations when it is initialized.
+   * - `false`: No.
+   */
+  autoLoadConversations?: boolean;
 
   /**
    * @deprecated Use {@link withAppId} and {@link withAppKey} instead.
@@ -274,6 +296,9 @@ export class ChatOptions {
     loginExtraInfo?: string;
     workPathCopiable?: boolean;
     uikitVersion?: string;
+    enableStatistics?: boolean;
+    autoLoadConversations?: boolean;
+    nativeLibBasePath?: string;
   }) {
     if (!params.appKey && !params.appId) {
       throw new ChatError({
@@ -321,6 +346,9 @@ export class ChatOptions {
     this.loginExtraInfo = params.loginExtraInfo;
     this.workPathCopiable = params.workPathCopiable ?? false;
     this.uikitVersion = params.uikitVersion;
+    this.enableStatistics = params.enableStatistics ?? false;
+    this.autoLoadConversations = params.autoLoadConversations ?? true;
+    this.nativeLibBasePath = params.nativeLibBasePath;
   }
 
   static withAppId(params: {
@@ -357,6 +385,9 @@ export class ChatOptions {
     loginExtraInfo?: string;
     workPathCopiable?: boolean;
     uikitVersion?: string;
+    enableStatistics?: boolean;
+    autoLoadConversations?: boolean;
+    nativeLibBasePath?: string;
   }) {
     return new ChatOptions({
       ...params,
@@ -398,6 +429,9 @@ export class ChatOptions {
     loginExtraInfo?: string;
     workPathCopiable?: boolean;
     uikitVersion?: string;
+    enableStatistics?: boolean;
+    autoLoadConversations?: boolean;
+    nativeLibBasePath?: string;
   }) {
     return new ChatOptions({
       ...params,

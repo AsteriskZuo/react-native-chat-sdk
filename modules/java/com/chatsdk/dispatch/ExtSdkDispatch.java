@@ -951,6 +951,9 @@ public class ExtSdkDispatch implements ExtSdkApi {
             case ExtSdkMethodType.modifyMsgBody:
                 ExtSdkChatManagerWrapper.getInstance().modifyMsgBody(jsonParams, methodType, callback);
                 break;
+            case ExtSdkMethodType.getOptions:
+                ExtSdkClientWrapper.getInstance().getOptions(jsonParams, methodType, callback);
+                break;
 
             default:
                 callback.fail(1, "no implement: " + methodType);

@@ -1106,6 +1106,9 @@ static NSString *const TAG = @"ExtSdkDispatch";
     case ExtSdkMethodKeymodifyMsgBodyValue:
         [[ExtSdkChatManagerWrapper getInstance] modifyMsgBody:ps withMethodType:methodType result:callback];
         break;
+    case ExtSdkMethodKeygetOptionsValue:
+        [[ExtSdkClientWrapper getInstance] getOptions:ps withMethodType:methodType result:callback];
+        break;
 
     default:
         [callback onFail:1 withExtension:[NSString stringWithFormat:@"not implement: %@", methodType]];

@@ -378,6 +378,9 @@ static NSString *_Nonnull const ExtSdkMethodKeygetMessagesWithIds = @"getMessage
 static NSString *_Nonnull const ExtSdkMethodKeygetConvsMsgsWithKeyword = @"getConvsMsgsWithKeyword";
 static NSString *_Nonnull const ExtSdkMethodKeymodifyMsgBody = @"modifyMsgBody";
 
+// 2025-08-04
+static NSString *_Nonnull const ExtSdkMethodKeygetOptions = @"getOptions";
+
 // ############################################################################
 // value start
 // ############################################################################
@@ -745,6 +748,9 @@ static const int ExtSdkMethodKeyupdateGroupAvatarValue = 2022;
 static const int ExtSdkMethodKeygetMessagesWithIdsValue = 2023;
 static const int ExtSdkMethodKeygetConvsMsgsWithKeywordValue = 2024;
 static const int ExtSdkMethodKeymodifyMsgBodyValue = 2025;
+
+// 2025-08-04
+static const int ExtSdkMethodKeygetOptionsValue = 2026;
 
 @interface ExtSdkMethodTypeObjc : NSObject
 

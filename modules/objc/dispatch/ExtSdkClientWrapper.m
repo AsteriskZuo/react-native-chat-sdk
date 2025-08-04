@@ -65,6 +65,17 @@
     [self onResult:result withMethodType:ExtSdkMethodKeyInit withError:nil withParams:nil];
 }
 
+- (void)getOptions:(NSDictionary *)param
+    withMethodType:(NSString *)aChannelName
+            result:(nonnull id<ExtSdkCallbackObjc>)result {
+    EMOptions *options = EMClient.sharedClient.options;
+    if (options != nil) {
+      [self onResult:result withMethodType:aChannelName withError:nil withParams:[options toJsonObject]];
+    } else {
+      [self onResult:result withMethodType:aChannelName withError:nil withParams:nil];
+    }
+}
+
 - (void)getToken:(NSDictionary *)param
     withMethodType:(NSString *)aChannelName
             result:(nonnull id<ExtSdkCallbackObjc>)result {

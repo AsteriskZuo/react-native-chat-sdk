@@ -471,6 +471,8 @@ RCT_EXPORT_METHOD(multiply : (double)a b : (double)b resolve : (RCTPromiseResolv
         ExtSdkMethodKeygetMessagesWithIds,
         ExtSdkMethodKeygetConvsMsgsWithKeyword,
         ExtSdkMethodKeymodifyMsgBody,
+        
+        ExtSdkMethodKeygetOptions,
     ];
     //    NSLog(@"%@: supportedEvents: %@", TAG, ret);
     return ret;

@@ -128,6 +128,12 @@ export class ClientOthersScreen extends Component<
     this.setState({ version: ChatClient.getInstance().version });
   }
 
+  private async getOptions(): Promise<void> {
+    const options = await ChatClient.getInstance().getOptions();
+    console.log(`${ClientOthersScreen.TAG}: getOptions: `, options);
+    this.setState({ result: JSON.stringify(options) });
+  }
+
   private customAction(): void {
     const newMsg2 = ChatMessage.createTextMessage('zuoyu2', "I'm fine", 0);
     ChatClient.getInstance()
@@ -255,6 +261,14 @@ export class ClientOthersScreen extends Component<
               title="version"
               onPress={() => {
                 this.getVersion();
+              }}
+            />
+          </View>
+          <View style={styleValues.containerRow}>
+            <Button
+              title="getOptions"
+              onPress={() => {
+                this.getOptions();
               }}
             />
           </View>

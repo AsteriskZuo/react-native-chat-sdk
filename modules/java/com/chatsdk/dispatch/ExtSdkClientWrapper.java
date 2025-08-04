@@ -315,6 +315,15 @@ public class ExtSdkClientWrapper extends ExtSdkWrapper {
         });
     }
 
+    public void getOptions(JSONObject param, String channelName, ExtSdkCallback result) throws JSONException {
+        if (EMClient.getInstance().isSdkInited()) {
+            EMOptions options = EMClient.getInstance().getOptions();
+            ExtSdkWrapper.onSuccess(result, channelName, ExtSdkOptionsHelper.toJson(options));
+        } else {
+            ExtSdkWrapper.onSuccess(result, channelName, null);
+        }
+    }
+
     public void addEMListener() {
         if (this.multiDeviceListener != null) {
             EMClient.getInstance().removeMultiDeviceListener(this.multiDeviceListener);

@@ -20,6 +20,7 @@ export const MTgetCurrentUser = 'getCurrentUser';
 export const MTgetToken = 'getToken';
 export const MTloginWithAgoraToken = 'loginWithAgoraToken';
 export const MTisConnected = 'isConnected';
+export const MTgetOptions = 'getOptions';
 export const MTrenewToken = 'renewToken';
 
 /// ChatClient listener

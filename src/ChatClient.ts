@@ -8,6 +8,7 @@ import {
   MTcreateAccount,
   MTgetCurrentUser,
   MTgetLoggedInDevicesFromServer,
+  MTgetOptions,
   MTgetToken,
   MTinit,
   MTisConnected,
@@ -426,6 +427,8 @@ export class ChatClient extends BaseManager {
    * Ensure that you set the SDK options during initialization. See {@link ChatOptions}.
    *
    * @returns The SDK configurations.
+   *
+   * @deprecated Use {@link getOptions} instead.
    */
   public get options(): ChatOptions | undefined {
     chatlog.log(`${ChatClient.TAG}: options: `);
@@ -477,6 +480,27 @@ export class ChatClient extends BaseManager {
     chatlog.tag = this._options!.logTag ?? '[chat]';
     const r = await Native._callMethod(MTinit, { options: this._options });
     ChatClient.checkErrorFromResult(r);
+  }
+
+  /**
+   * Gets the SDK options from native platform.
+   *
+   * @returns The SDK options.
+   */
+  public async getOptions(): Promise<ChatOptions | undefined> {
+    chatlog.log(`${ChatClient.TAG}: getOptions: `);
+    const r: any = await Native._callMethod(MTgetOptions);
+    ChatClient.checkErrorFromResult(r);
+    const rr = r?.[MTgetOptions];
+    if (rr === undefined || rr === null) {
+      return undefined;
+    }
+    const ret = new ChatOptions(rr);
+    ret.logTag = this._options?.logTag;
+    ret.logTimestamp = this._options?.logTimestamp;
+    ret.debugModel = this._options?.debugModel ?? false;
+    ret.pushConfig = this._options?.pushConfig;
+    return ret;
   }
 
   /**
